@@ -1,39 +1,42 @@
 from zooAnimales.animal import Animal
 
 class Anfibio(Animal):
+    _listado = []
     ranas = 0
     salamandras = 0
-    listado = []
-
-    def __init__(self, nombre=None, edad=None, habitat=None, genero=None, color_piel=None, venenoso=None):
+    
+    def __init__(self, nombre, edad, habitat, genero, colorPiel, venenoso):
         super().__init__(nombre, edad, habitat, genero)
-        self.color_piel = color_piel
-        self.venenoso = venenoso
-        Anfibio.listado.append(self)
+        self._colorPiel = colorPiel
+        self._venenoso = venenoso
+        Anfibio._listado.append(self)
 
     @staticmethod
-    def cantidad_anfibios():
-        return len(Anfibio.listado)
-
-    def movimiento(self):
+    def cantidadAnfibios():
+        return len(Anfibio._listado)
+    
+    @staticmethod
+    def movimiento():
         return "saltar"
+    
+    @classmethod
+    def crearRana(cls, nombre, edad, genero):
+        cls(nombre, edad, "selva", genero, "rojo", True)
+        cls.ranas += 1 
 
-    @staticmethod
-    def crear_rana(nombre, edad, genero):
-        Anfibio.ranas += 1
-        rana = Anfibio(nombre, edad, "selva", genero, "rojo", True)
-        Anfibio.listado.append(rana)
-        return rana
+    @classmethod
+    def crearSalamandra(cls, nombre, edad, genero):
+        cls(nombre, edad, "selva", genero, "negro y amarillo", False)
+        cls.salamandras += 1 
 
-    @staticmethod
-    def crear_salamandra(nombre, edad, genero):
-        Anfibio.salamandras += 1
-        salamandra = Anfibio(nombre, edad, "selva", genero, "negro y amarillo", False)
-        Anfibio.listado.append(salamandra)
-        return salamandra
+    def getColorPiel(self):
+        return self._colorPiel
 
-    def get_color_piel(self):
-        return self.color_piel
+    def setColorPiel(self, colorPiel):
+        self._colorPiel = colorPiel
 
-    def is_venenoso(self):
-        return self.venenoso
+    def isVenenoso(self):
+        return self._venenoso
+    
+    def setVenenoso(self, venenoso):
+        self._venenoso = venenoso

@@ -1,39 +1,42 @@
 from zooAnimales.animal import Animal
 
 class Reptil(Animal):
+    _listado = []
     iguanas = 0
     serpientes = 0
-    listado = []
-
-    def __init__(self, nombre, edad, habitat, genero, color_escamas, largo_cola):
+    
+    def __init__(self, nombre, edad, habitat, genero, colorEscamas, largoCola):
         super().__init__(nombre, edad, habitat, genero)
-        self.color_escamas = color_escamas
-        self.largo_cola = largo_cola
-        Reptil.listado.append(self)
+        self._colorEscamas = colorEscamas
+        self._largoCola = largoCola
+        Reptil._listado.append(self)
 
     @staticmethod
-    def cantidad_reptiles():
-        return len(Reptil.listado)
-
-    def movimiento(self):
+    def cantidadReptiles():
+        return len(Reptil._listado)
+    
+    @staticmethod
+    def movimiento():
         return "reptar"
+    
+    @classmethod
+    def crearIguana(cls, nombre, edad, genero):
+       cls.iguanas += 1 
+       return cls(nombre, edad, "humedal", genero, "verde", 3)
 
-    @staticmethod
-    def crear_iguana(nombre, edad, genero):
-        Reptil.iguanas += 1
-        iguana = Reptil(nombre, edad, "humedal", genero, "verde", 3)
-        Reptil.listado.append(iguana)
-        return iguana
+    @classmethod
+    def crearSerpiente(cls, nombre, edad, genero):
+        cls.serpientes += 1 
+        return cls(nombre, edad, "jungla", genero, "blanco", 1)
 
-    @staticmethod
-    def crear_serpiente(nombre, edad, genero):
-        Reptil.serpientes += 1
-        serpiente = Reptil(nombre, edad, "jungla", genero, "blanco", 1)
-        Reptil.listado.append(serpiente)
-        return serpiente
+    def getColorEscamas(self):
+        return self._colorEscamas
 
-    def get_color_escamas(self):
-        return self.color_escamas
+    def setColorEscamas(self, colorEscamas):
+        self._colorEscamas = colorEscamas
 
-    def get_largo_cola(self):
-        return self.largo_cola
+    def getLargoCola(self):
+        return self._largoCola
+    
+    def setLargoCola(self, largoCola):
+        self._largoCola = largoCola

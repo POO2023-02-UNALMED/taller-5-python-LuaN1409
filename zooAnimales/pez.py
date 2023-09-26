@@ -1,39 +1,42 @@
 from zooAnimales.animal import Animal
 
 class Pez(Animal):
+    _listado = []
     salmones = 0
     bacalaos = 0
-    listado = []
-
-    def __init__(self, nombre, edad, habitat, genero, color_escamas, cantidad_aletas):
+    
+    def __init__(self, nombre, edad, habitat, genero, colorEscamas, cantidadAletas):
         super().__init__(nombre, edad, habitat, genero)
-        self.color_escamas = color_escamas
-        self.cantidad_aletas = cantidad_aletas
-        Pez.listado.append(self)
+        self._colorEscamas = colorEscamas
+        self._cantidadAletas = cantidadAletas
+        Pez._listado.append(self)
 
     @staticmethod
-    def cantidad_peces():
-        return len(Pez.listado)
-
-    def movimiento(self):
-        return "nadar"
-
+    def cantidadPeces():
+        return len(Pez._listado)
+    
     @staticmethod
-    def crear_salmon(nombre, edad, genero):
-        Pez.salmones += 1
-        salmon = Pez(nombre, edad, "oceano", genero, "rojo", 6)
-        Pez.listado.append(salmon)
-        return salmon
+    def movimiento():
+        return "volar"
+    
+    @classmethod
+    def crearSalmon(cls, nombre, edad, genero):
+        cls.salmones += 1 
+        return cls(nombre, edad, "oceano", genero, "rojo", 6)
 
-    @staticmethod
-    def crear_bacalao(nombre, edad, genero):
-        Pez.bacalaos += 1
-        bacalao = Pez(nombre, edad, "oceano", genero, "gris", 6)
-        Pez.listado.append(bacalao)
-        return bacalao
+    @classmethod
+    def crearBacalao(cls, nombre, edad, genero):
+        cls.bacalaos += 1 
+        return cls(nombre, edad, "oceano", genero, "gris", 6)
 
-    def get_color_escamas(self):
-        return self.color_escamas
+    def getColorEscamas(self):
+        return self._colorEscamas
 
-    def get_cantidad_aletas(self):
-        return self.cantidad_aletas
+    def setColorEscamas(self, colorEscamas):
+        self._colorEscamas = colorEscamas
+
+    def getCantidadAletas(self):
+        return self._cantidadAletas
+    
+    def setCantidadAletas(self, cantidadAletas):
+        self._cantidadAletas = cantidadAletas
