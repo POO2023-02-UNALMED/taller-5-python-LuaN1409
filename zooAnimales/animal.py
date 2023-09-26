@@ -20,7 +20,7 @@ class Animal:
         return "desplazarse"
 
     @staticmethod
-    def total_por_tipo():
+    def __str__(self):
         return f"Mamiferos: {Mamifero.cantidad_mamiferos()}\n" \
                f"Aves: {Ave.cantidad_aves()}\n" \
                f"Reptiles: {Reptil.cantidad_reptiles()}\n" \
